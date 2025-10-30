@@ -135,3 +135,42 @@ wish. The rules will automatically apply and fill in. Once you are finished
 Ctrl-S to save your work.
 
 ![Full level](./screenshots/fulllevel.png)
+
+## LDTK importer plugin
+Open up your project in Godot. Go to the AssetLib page and search for the LDTK
+importer plugin. Once you download it, create an "addons" folder under "res://"
+and move the "ldtk-importer" folder inside.
+
+![LDTK Addon](./screenshots/ldtkaddon.png)
+
+Now go to `Project > Project Settings > Plugins` and enable the plugin. Now reload
+the project by going to `Project > Reload Current Project`.
+
+## Importing level
+Click on your .ldtk file and go to the Import tab. Import it. Now right click
+the .ldtk file and click on `New Inherited Scene`. Ctrl-S to save the new scene.
+
+Go to `Project > Project Settings`. Inside `General > Display > Window`, change
+`Viewport Width` and `Viewport Height` to 1280 and 720 respectively. Set the
+`Scale Factor` to 4.0 and the `Scale Mode` to `integer`. Under `Rendering >
+Textures` set the `Default Texture Filter` to `Nearest`. Under `Rendering > 2D`,
+turn `Snap 2D Transforms to Pixel` on. The reasoning behind this is to take our
+320 px by 192 px level and scale it to fit the window. The other settings are to
+stop the pixels from being blurred by Godot's default filters.
+
+If you click on the play button now, your level should appear. If it prompts you
+to select the Current Scene do so.
+
+## Collisions
+Inside of the `tilesets` folder, double click on `tileset_16px.res`. On the
+right hand menu, under `Physics Layer`, hit `Add Element`. In the menu on the
+bottom navigate to `Tileset` and select all the tiles we want to have collisons
+for by holding shift. You will want to go to `Select > Physics > Physics Layer
+0` and use the green Points tool to make a rectangle by clicking on the 4
+corners. (You need to click on the first point you made at the end again)
+
+![Tileset Collisons](./screenshots/tilestcollisons.png)
+
+Go to `Debug` and turn on `Visible Collison Shapes`. If you run the game now you
+will see the collisions shapes.
+![Collison Shapes](./screenshots/collisonshapes.png)
