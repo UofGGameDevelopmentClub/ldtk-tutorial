@@ -103,6 +103,17 @@ tile by right clicking. Reduce the probability of the decorations to 35.
 
 Duplicate the original wall rule, change it to 'Rectangle of tiles' and select
 the top middle in the grid. When selecting tiles, hold down shift and select the
-middle water fountain.
+middle water fountain. Reduce the probability of this rule to 20. Turn on perlin
+filtering as well. Duplicate the previous rule and select the slime fountain instead.
 ![Fountain](./screenshots/fountain.png)
 ![Fountain rule](./screenshots/fountainrule.png)
+
+Lets make the top of the walls appear as well. Make a new rule, select the tile
+above the wall. Click on the tile below the central tile in the grid and then
+right click on the one below that.
+![Top of the wall](./screenshots/topofwall.png)
+
+## Drawing your level
+We are done with setting up the autorules! You can now draw the level as you
+wish. The rules will automatically apply and fill in. Once you are finished
+Ctrl-S to save your work.
