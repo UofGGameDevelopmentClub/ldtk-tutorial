@@ -55,11 +55,13 @@ Values section name it "Walls" and make it a dark red colour.
 ![Collisions Layer](./screenshots/collisionslayer.png)
 
 Now make a new Auto-layer layer and name it 'Floors'. Set the Auto-layer source
-to 'Collisions' and the Auto-layer tileset to our tileset. Now the idea behind
-this is to setup this layer such that it fills in anything that isn't a
-Collision. To do this hit 'Edit Rules'.
+to 'Collisions' and the Auto-layer tileset to our tileset. Make sure to drag the
+Floor layer so that it is below the Collisions layer in the sidebar. Now the
+idea behind this layer is to setup this layer such that it fills in anything
+that isn't a Collision. To do this hit 'Edit Rules'.
 ![Floors Layer](./screenshots/floorslayer.png)
 
+## Floor rules
 Make a new empty group and call it 'Floors'. Hit the orange Plus icon to make a
 new rule. Click on the top bar for Individual Tiles and select the regular floor
 tile. Now right click on the center tile in the grid. What this does is it sets
@@ -73,6 +75,34 @@ Control clicking on them.
 Right on the center tile like before. Once you escape out of the rule, it will
 apply and set all the tiles to random broken tiles. But of course we do not want
 all the tiles to be broken! To solve this we can change the probability that a
-tile will be broken. Hit the P icon to enable perlin filtering. Now right click
-it and you can change the scale, octaves and regenerate the filter if need be.
+tile will be broken. Hit the dice icon and change the value from 100 to 40. Also
+hit the P icon to enable perlin filtering. Now right click it and you can change
+the scale, octaves and regenerate the filter if need be. The broken tile pattern
+will now appear a lot more random.
 ![Perlin filtering](./screenshots/perlinnoise.png)
+
+## Wall Rules
+Now exit that menu and hit on the Rules button in the Collisions layer.
+![Collisions Rules](./screenshots/collisionsrules.png)
+
+Make a new empty group and call it 'Walls'. Make a new rule and select the empty
+tile in the top left and click on the center tile. You will now notice if you
+try painting some walls, the floors will dissapear and you get an empty tile.
+![Empty Wall](./screenshots/emptywall.png)
+
+Make a new rule and select the second wall tile in the middle. Click on the
+center tile and right click on the tile below it in the grid. This will make it
+so that any Wall tile we paint with a floor below it will be filled in.
+![Bottom Wall](./screenshots/bottomwall.png)
+
+Lets add some wall decorations. Duplicate the rule we just made by right
+clicking on it and selecting the 'x2' icon. Now change the selected tiles it
+has to the wall decorations below. You can deselect the old undecorated wall
+tile by right clicking. Reduce the probability of the decorations to 35.
+![Wall decorations](./screenshots/walldecorations.png)
+
+Duplicate the original wall rule, change it to 'Rectangle of tiles' and select
+the top middle in the grid. When selecting tiles, hold down shift and select the
+middle water fountain.
+![Fountain](./screenshots/fountain.png)
+![Fountain rule](./screenshots/fountainrule.png)
