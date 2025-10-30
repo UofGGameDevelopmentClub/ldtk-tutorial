@@ -42,5 +42,37 @@ in a 16:9 ratio for the sake of the tutorial.
 ## Importing our tileset
 We need to import the tileset into our level. To do this click on the Tilesets
 or simply use the keybind 'T'. A menu should pop up. Create a new tileset and
-pick the 0x72_DungeonTilesetII_v1.7.png tileset as the Source Image.
+pick the 0x72_DungeonTilesetII_v1.7.png tileset as the Source Image. LDTK should
+autodetect all the rest.
 ![Tileset Import](./screenshots/tilesetimport.png)
+
+## Setting up Layers
+In LDTK, layers are what you draw with. The level editor can use these layers
+plus some rules we will talk about later to autogenerate tiles. Go to the Layers
+menu or use the keybind 'L'. In the menu that pops up, make a new IntGrid layer,
+call it "Collisions", set the Auto-layer Tileset to our tileset and in the Grid
+Values section name it "Walls" and make it a dark red colour.
+![Collisions Layer](./screenshots/collisionslayer.png)
+
+Now make a new Auto-layer layer and name it 'Floors'. Set the Auto-layer source
+to 'Collisions' and the Auto-layer tileset to our tileset. Now the idea behind
+this is to setup this layer such that it fills in anything that isn't a
+Collision. To do this hit 'Edit Rules'.
+![Floors Layer](./screenshots/floorslayer.png)
+
+Make a new empty group and call it 'Floors'. Hit the orange Plus icon to make a
+new rule. Click on the top bar for Individual Tiles and select the regular floor
+tile. Now right click on the center tile in the grid. What this does is it sets
+up a rule that fills anything that isn't a wall with our floor tile.
+![Floor rule](./screenshots/floorrule.png)
+
+Make a new rule. When selecting the tiles, select all the broken tiles by
+Control clicking on them. 
+![Broken Tiles](./screenshots/brokentiles.png)
+
+Right on the center tile like before. Once you escape out of the rule, it will
+apply and set all the tiles to random broken tiles. But of course we do not want
+all the tiles to be broken! To solve this we can change the probability that a
+tile will be broken. Hit the P icon to enable perlin filtering. Now right click
+it and you can change the scale, octaves and regenerate the filter if need be.
+![Perlin filtering](./screenshots/perlinnoise.png)
