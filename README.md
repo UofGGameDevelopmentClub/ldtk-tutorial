@@ -66,6 +66,7 @@ Make a new empty group and call it 'Floors'. Hit the orange Plus icon to make a
 new rule. Click on the top bar for Individual Tiles and select the regular floor
 tile. Now right click on the center tile in the grid. What this does is it sets
 up a rule that fills anything that isn't a wall with our floor tile.
+
 ![Floor rule](./screenshots/floorrule.png)
 
 Make a new rule. When selecting the tiles, select all the broken tiles by
