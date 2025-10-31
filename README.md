@@ -161,6 +161,8 @@ stop the pixels from being blurred by Godot's default filters.
 If you click on the play button now, your level should appear. If it prompts you
 to select the Current Scene do so.
 
+![Godot Level](./screenshots/godotlevel.png)
+
 ## Collisions
 Inside of the `tilesets` folder, double click on `tileset_16px.res`. On the
 right hand menu, under `Physics Layer`, hit `Add Element`. In the menu on the
@@ -174,3 +176,86 @@ corners. (You need to click on the first point you made at the end again)
 Go to `Debug` and turn on `Visible Collison Shapes`. If you run the game now you
 will see the collisions shapes.
 ![Collison Shapes](./screenshots/collisonshapes.png)
+
+
+## Adding a Player Character
+Inside of the folder you uncompressed for your tileset, there will be a folder
+called `frames`. Move all the sprites starting with `knight_m` to a new folder
+inside the Godot project called `Player`.
+
+Right click on the `Level_O` in the sidebar and click on `Add Child Node`. Add a
+`CharacterBody2D` node. Now under that node add a `AnimatedSprite2D` node and
+`CollisionShapes2D` node.
+
+![Nodes](./screenshots/nodes.png)
+
+Rename the `CharacterBody2D` to `Player`. Right click on it and do `Save Branch
+as Scene` and save it under the `Player` folder. Click on the `Open in Editor`
+icon next to the Player in the sidebar. Click on the `AnimatedSprite2D` on the
+right hand menu, set `Transform > Position > y` to -11. Set the `Sprite Frames`
+property to `New Sprite Frame`. Click on it.
+
+![Animation Menu](./screenshots/animationmenu.png)
+
+Shift select all the `knight_idle_m` frames. Drag and drop them in the Sprite
+Frames menu at the bottom of the screen. Set the FPS to 10. Rename the animation
+from `default` to `Idle`.
+
+![Idle anim](./screenshots/idleanim.png)
+
+Use Ctrl-N to create a new Animation. Name it `Run`. Shift select all the
+`knight_run_m` frames. Drag and drop in the Sprite Frames menu at the bottom of
+the screen. Set the FPS to 10.
+
+Click on `CollisionShapes2D` and change the `Shapes` property to
+`CapsuleShape2D`. Reshape the capsule to look something like below. Ctrl-S to
+save the Player.
+Hint: You can rotate in the `Transform` menu on the right.
+
+![Capsule](./screenshots/capsule.png)
+
+## Programming Player logic
+Right click on the Player and click `Attach Script`. You can use the script
+below and the game should have a playable character.
+
+```gdscript
+extends CharacterBody2D
+
+@onready var sprite: AnimatedSprite2D = get_node("AnimatedSprite2D")
+
+const speed = 80
+const acceleration = 10
+
+func get_input_direction() -> Vector2:
+	# Gets key input as vector
+	var direction: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	
+	# Flip the sprite if either left or right has been pressed
+	if direction.x < 0:
+		sprite.flip_h = true
+	if direction.x > 0:
+		sprite.flip_h = false
+		
+	return direction
+
+# Runs every frame
+func _process(delta: float) -> void:
+	# Normalize vector to ensure to diagonal speedboost
+	var input_dir = get_input_direction().normalized()
+	
+	# Play Idle animation if not moving otherwise play Run
+	if input_dir == Vector2.ZERO:
+		sprite.play("Idle")
+	else:
+		sprite.play("Run")
+		
+	# Gradually approach desired velocity rather than immediately
+	# to have movement appear more natural
+	velocity = Vector2(
+		lerp(velocity.x, input_dir.x * speed, acceleration * delta),
+		lerp(velocity.y, input_dir.y * speed, acceleration * delta)
+	)
+	
+	# Apply velocity to position and handle collision physics
+	move_and_slide()
+```
